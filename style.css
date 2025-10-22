@@ -1,0 +1,37 @@
+body {
+    background-color: #181818;
+    margin: 40px auto;
+    max-width: 800px;
+    padding: 48px;
+}
+
+h1 {
+    text-align: center;
+}
+
+hr {
+    margin: 32px 0;
+    color: #2a2a2a;
+}
+
+textarea {
+    background-color: #1d1d1d;
+    color: #cccccc;
+    padding: 14px;
+    margin: 12px 0;
+    font-size: 14px;
+    width: 100%;
+    resize: none;
+    min-height: 10vh;
+    max-height: 40vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    outline: 2px solid #2a2a2a;
+    border: 0;
+    border-radius: 12px;
+}
+
+textarea:focus {
+    color: #ffffff;
+    outline: 4px solid #2a2a2a;
+}

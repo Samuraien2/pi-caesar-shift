@@ -2,7 +2,7 @@
 // but since its just for fun this will do.. :)
 // introducing... the: PI CAESAR SHIFT!!!!
 
-const includedLetters = "!\"$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ÆØÅæøå";
+const includedLetters = "!\"$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ [\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
 let piDigits = null;
 
@@ -41,12 +41,14 @@ function encrypt() {
     let output = "";
 
     for (let i = 0; i < input.length; i++) {
-        let index = includedLetters.indexOf(input.charAt(i));
+        const ch = input.charAt(i);
+
+        let index = includedLetters.indexOf(ch);
         if (index != -1) {
-            const code = index + parseInt(piDigits.charAt(i+2));
-            console.log(`${index} + ${piDigits.charAt(i+2)} = ${code}`);
+            const code = (index + parseInt(piDigits.charAt(i))) % includedLetters.length;
             output += includedLetters.charAt(code);
-            // TODO: account for overflow with mod
+        } else {
+            output += ch;
         }
     }
 
@@ -55,8 +57,24 @@ function encrypt() {
     fitTextarea(encryptOutput);
 }
 
+function wrapMod(n, m) {
+    return ((n % m) + m) % m;
+}
+
 function decrypt() {
-    // in progress
+    const input = decryptInput.value;
+    let output = "";
+
+    for (let i = 0; i < input.length; i++) {
+        let ch = input.charAt(i);
+        let index = includedLetters.indexOf(ch);
+        if (index != -1) {
+            const code = wrapMod(index - parseInt(piDigits.charAt(i)), includedLetters.length);
+            output += includedLetters.charAt(code);
+        } else {
+            output += ch;
+        }
+    }
 
     decryptOutput.value = output;
     fitTextarea(decryptInput);

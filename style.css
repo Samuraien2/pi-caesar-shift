@@ -33,5 +33,5 @@ textarea {
 
 textarea:focus {
     color: #ffffff;
-    outline: 4px solid #2a2a2a;
+    outline-width: 4px;
 }
